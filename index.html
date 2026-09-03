@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Home -->
+    <section id="home" class="card">
+        <h1>Quiz Builder</h1>
+        <p>Test your knowledge of HTML, CSS, JavaScript and GitHub</p>
+        <button id="startBtn">Start Quiz</button>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="card hidden">
+
+        <h2 id="quizQuestion"></h2>
+
+        <div id="quizOptions"></div>
+
+        <p id="progress"></p>
+
+        <button id="nextBtn">Next</button>
+
+    </section>
+
+    <!-- Result -->
+    <section id="result" class="card hidden">
+
+        <h1>Quiz Completed!</h1>
+
+        <h2 id="score"></h2>
+
+        <h3>Correct Answers</h3>
+
+        <div id="answers"></div>
+
+        <button id="restartBtn">Restart Quiz</button>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
