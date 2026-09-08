@@ -162,8 +162,31 @@ let questions = [
             "spacing"
         ],
         answer: 2
+    },
+
+    {
+        question: "Which language is mainly used to style a web page?",
+        options: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Python"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "Which command is used to upload changes to GitHub?",
+        options: [
+            "git pull",
+            "git clone",
+            "git push",
+            "git add"
+        ],
+        answer: 2
     }
 ];
+
 
 let currentQuestion = 0;
 let selectedAnswer = -1;
@@ -172,11 +195,14 @@ let score = 0;
 
 /* Buttons */
 
-document.getElementById("startBtn").addEventListener("click", startQuiz);
+document.getElementById("startBtn")
+    .addEventListener("click", startQuiz);
 
-document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+document.getElementById("nextBtn")
+    .addEventListener("click", nextQuestion);
 
-document.getElementById("restartBtn").addEventListener("click", restartQuiz);
+document.getElementById("restartBtn")
+    .addEventListener("click", restartQuiz);
 
 
 /* Start Quiz */
@@ -187,11 +213,14 @@ function startQuiz() {
     selectedAnswer = -1;
     score = 0;
 
-    document.getElementById("home").classList.add("hidden");
+    document.getElementById("home")
+        .classList.add("hidden");
 
-    document.getElementById("result").classList.add("hidden");
+    document.getElementById("result")
+        .classList.add("hidden");
 
-    document.getElementById("quiz").classList.remove("hidden");
+    document.getElementById("quiz")
+        .classList.remove("hidden");
 
     showQuestion();
 }
@@ -203,19 +232,21 @@ function showQuestion() {
 
     let q = questions[currentQuestion];
 
-    let optionsBox = document.getElementById("quizOptions");
+    let optionsBox =
+        document.getElementById("quizOptions");
 
     selectedAnswer = -1;
 
-    document.getElementById("quizQuestion").textContent =
-        q.question;
+    document.getElementById("quizQuestion")
+        .textContent = q.question;
 
     optionsBox.innerHTML = "";
 
 
     q.options.forEach(function(option, index) {
 
-        let button = document.createElement("button");
+        let button =
+            document.createElement("button");
 
         button.textContent = option;
 
@@ -287,7 +318,10 @@ function showQuestion() {
     });
 
 
-    document.getElementById("progress").textContent =
+    /* Show progress */
+
+    document.getElementById("progress")
+        .textContent =
         "Question " +
         (currentQuestion + 1) +
         " of " +
@@ -305,6 +339,7 @@ function nextQuestion() {
 
         return;
     }
+
 
     currentQuestion++;
 
@@ -334,7 +369,8 @@ function showResult() {
         .classList.remove("hidden");
 
 
-    document.getElementById("score").textContent =
+    document.getElementById("score")
+        .textContent =
         "Your score: " +
         score +
         " / " +
@@ -349,12 +385,14 @@ function showResult() {
 
     questions.forEach(function(q, index) {
 
-        let item = document.createElement("p");
+        let item =
+            document.createElement("p");
 
 
         /* Question */
 
-        let question = document.createElement("b");
+        let question =
+            document.createElement("b");
 
         question.textContent =
             (index + 1) +
@@ -364,7 +402,8 @@ function showResult() {
 
         /* Correct Answer */
 
-        let answer = document.createElement("span");
+        let answer =
+            document.createElement("span");
 
         answer.textContent =
             "Correct Answer: " +
