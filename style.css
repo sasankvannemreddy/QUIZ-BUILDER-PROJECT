@@ -1,0 +1,180 @@
+/* General Page */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 700px;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Hide Sections */
+.hidden {
+    display: none;
+}
+
+/* Headings */
+h1 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+}
+
+h3 {
+    color: #555;
+    margin: 20px 0;
+}
+
+/* Home Text */
+#home p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+/* Main Buttons */
+#startBtn,
+#nextBtn,
+#restartBtn {
+    background: #4a69bd;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#startBtn:hover,
+#nextBtn:hover,
+#restartBtn:hover {
+    background: #1e3799;
+}
+
+/* Quiz Options */
+#quizOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.quiz-option {
+    width: 100%;
+    padding: 14px;
+    background: #f1f2f6;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.quiz-option:hover:not(:disabled) {
+    background: #dfe4ea;
+    border-color: #4a69bd;
+}
+
+/* Correct Answer */
+.quiz-option.correct {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+    font-weight: bold;
+}
+
+/* Wrong Answer */
+.quiz-option.wrong {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+    font-weight: bold;
+}
+
+/* Progress */
+#progress {
+    color: #666;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+/* Result Score */
+#score {
+    color: #4a69bd;
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+/* Correct Answers Section */
+#answers {
+    text-align: left;
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+#answers p {
+    background: #f8f9fa;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #4a69bd;
+}
+
+#answers b {
+    color: #333;
+}
+
+#answers span {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+
+    .card {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .quiz-option {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
