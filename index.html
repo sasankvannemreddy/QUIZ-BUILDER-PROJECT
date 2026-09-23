@@ -6,49 +6,45 @@
     <title>Quiz Builder</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+<nav>
+    <h2>Quiz Builder</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+    </div>
+</nav>
 
-    <!-- Home -->
-    <section id="home" class="card">
-        <h1>Quiz Builder</h1>
-        <p>Test your knowledge of HTML, CSS, JavaScript and GitHub</p>
-        <button id="startBtn">Start Quiz</button>
-    </section>
+<section class="hero">
+    <div>
+        <h1>Test Your Knowledge</h1>
+        <p>Create and participate in interactive quizzes.</p>
 
-    <!-- Quiz -->
-    <section id="quiz" class="card hidden">
+        <div class="buttons">
+            <a href="signup.html" class="btn">Get Started</a>
+            <a href="login.html" class="btn secondary">Login</a>
+        </div>
+    </div>
+</section>
 
-        <h2 id="quizQuestion"></h2>
+<section class="features">
+    <div class="card">
+        <h3>Admin Module</h3>
+        <p>Create and manage quizzes and questions.</p>
+    </div>
 
-        <div id="quizOptions"></div>
+    <div class="card">
+        <h3>User Module</h3>
+        <p>Attempt quizzes and view your scores.</p>
+    </div>
 
-        <p id="progress"></p>
-
-        <button id="nextBtn">Next</button>
-
-    </section>
-
-    <!-- Result -->
-    <section id="result" class="card hidden">
-
-        <h1>Quiz Completed!</h1>
-
-        <h2 id="score"></h2>
-
-        <h3>Correct Answers</h3>
-
-        <div id="answers"></div>
-
-        <button id="restartBtn">Restart Quiz</button>
-
-    </section>
-
-</div>
-
-<script src="script.js"></script>
+    <div class="card">
+        <h3>Instant Results</h3>
+        <p>Get your score immediately after submitting.</p>
+    </div>
+</section>
 
 </body>
 </html>

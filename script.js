@@ -1,443 +1,404 @@
-let questions = [
-    {
-        question: "What is HTML?",
-        options: [
-            "Markup Language",
-            "Programming Language",
-            "Database",
-            "Operating System"
-        ],
-        answer: 0
-    },
+/* =========================
+   SIGNUP
+========================= */
 
-    {
-        question: "What does CSS stand for?",
-        options: [
-            "Computer Style System",
-            "Cascading Style Sheets",
-            "Creative Style Syntax",
-            "Colorful Style Sheets"
-        ],
-        answer: 1
-    },
+function signup() {
 
-    {
-        question: "Which HTML tag is used to create a hyperlink?",
-        options: [
-            "<img>",
-            "<link>",
-            "<a>",
-            "<href>"
-        ],
-        answer: 2
-    },
+    let name = document.getElementById("signupName").value;
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+    let role = document.getElementById("signupRole").value;
 
-    {
-        question: "Which JavaScript keyword declares a constant variable?",
-        options: [
-            "var",
-            "let",
-            "static",
-            "const"
-        ],
-        answer: 3
-    },
-
-    {
-        question: "Which HTML tag is used to display an image?",
-        options: [
-            "<img>",
-            "<image>",
-            "<pic>",
-            "<src>"
-        ],
-        answer: 0
-    },
-
-    {
-        question: "Which HTML tag creates the largest heading?",
-        options: [
-            "<h6>",
-            "<h1>",
-            "<heading>",
-            "<head>"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "Which technology is used to handle button clicks?",
-        options: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "SQL"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "What is the best way to process every question in an array?",
-        options: [
-            "Use a loop",
-            "Use CSS",
-            "Use an HTML comment",
-            "Use only alert()"
-        ],
-        answer: 0
-    },
-
-    {
-        question: "Why is JavaScript important in a quiz application?",
-        options: [
-            "It provides page structure",
-            "It controls logic and interaction",
-            "It only changes colors",
-            "It stores images"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "What is Git?",
-        options: [
-            "A database",
-            "A web browser",
-            "A version control system",
-            "A programming language"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "What is GitHub?",
-        options: [
-            "An online platform for Git repositories",
-            "A programming language",
-            "An operating system",
-            "A code compiler"
-        ],
-        answer: 0
-    },
-
-    {
-        question: "Which command downloads an existing repository?",
-        options: [
-            "git push",
-            "git clone",
-            "git add",
-            "git commit"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "Why are branches used in Git?",
-        options: [
-            "To delete repositories",
-            "To increase internet speed",
-            "To create separate development lines",
-            "To compile JavaScript"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "What is a commit?",
-        options: [
-            "A recorded snapshot of changes",
-            "A new HTML tag",
-            "A JavaScript function",
-            "A GitHub password"
-        ],
-        answer: 0
-    },
-
-    {
-        question: "Which property controls space inside an element?",
-        options: [
-            "margin",
-            "border",
-            "padding",
-            "spacing"
-        ],
-        answer: 2
-    },
-
-    {
-        question: "Which language is mainly used to style a web page?",
-        options: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "Python"
-        ],
-        answer: 1
-    },
-
-    {
-        question: "Which command is used to upload changes to GitHub?",
-        options: [
-            "git pull",
-            "git clone",
-            "git push",
-            "git add"
-        ],
-        answer: 2
+    if (name === "" || email === "" || password === "") {
+        document.getElementById("signupMessage").innerText =
+            "Please fill all fields.";
+        return;
     }
-];
 
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let existingUser = users.find(user => user.email === email);
+
+    if (existingUser) {
+        document.getElementById("signupMessage").innerText =
+            "User already exists.";
+        return;
+    }
+
+    users.push({
+        name: name,
+        email: email,
+        password: password,
+        role: role
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    document.getElementById("signupMessage").innerText =
+        "Signup successful!";
+
+    setTimeout(() => {
+        window.location.href = "login.html";
+    }, 1000);
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let user = users.find(
+        u => u.email === email && u.password === password
+    );
+
+    if (!user) {
+        document.getElementById("loginMessage").innerText =
+            "Invalid email or password.";
+        return;
+    }
+
+    localStorage.setItem("loggedUser", JSON.stringify(user));
+
+    if (user.role === "admin") {
+        window.location.href = "admin.html";
+    } else {
+        window.location.href = "user.html";
+    }
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "login.html";
+}
+
+
+/* =========================
+   ADMIN CHECK
+========================= */
+
+function checkAdmin() {
+
+    let user = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!user || user.role !== "admin") {
+        window.location.href = "login.html";
+    }
+}
+
+
+/* =========================
+   USER CHECK
+========================= */
+
+function checkUser() {
+
+    let user = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!user || user.role !== "user") {
+        window.location.href = "login.html";
+    }
+}
+
+
+/* =========================
+   QUIZ CREATION
+========================= */
+
+let questions = [];
+
+function addQuestion() {
+
+    let question = document.getElementById("question").value;
+
+    let options = [
+        document.getElementById("option1").value,
+        document.getElementById("option2").value,
+        document.getElementById("option3").value,
+        document.getElementById("option4").value
+    ];
+
+    let correctAnswer =
+        Number(document.getElementById("correctAnswer").value);
+
+    if (question === "" || options.some(option => option === "")) {
+        alert("Please fill all question fields.");
+        return;
+    }
+
+    questions.push({
+        question: question,
+        options: options,
+        answer: correctAnswer
+    });
+
+    displayQuestionList();
+
+    document.getElementById("question").value = "";
+    document.getElementById("option1").value = "";
+    document.getElementById("option2").value = "";
+    document.getElementById("option3").value = "";
+    document.getElementById("option4").value = "";
+}
+
+
+/* =========================
+   DISPLAY QUESTIONS
+========================= */
+
+function displayQuestionList() {
+
+    let list = document.getElementById("questionList");
+
+    list.innerHTML = "";
+
+    questions.forEach((q, index) => {
+
+        let div = document.createElement("div");
+
+        div.className = "card";
+
+        div.innerHTML =
+            "<h3>Question " + (index + 1) + "</h3>" +
+            "<p>" + q.question + "</p>";
+
+        list.appendChild(div);
+    });
+}
+
+
+/* =========================
+   SAVE QUIZ
+========================= */
+
+function saveQuiz() {
+
+    let title = document.getElementById("quizTitle").value;
+
+    if (title === "" || questions.length === 0) {
+        document.getElementById("quizMessage").innerText =
+            "Enter quiz title and add questions.";
+        return;
+    }
+
+    let quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+
+    quizzes.push({
+        id: Date.now(),
+        title: title,
+        questions: questions
+    });
+
+    localStorage.setItem("quizzes", JSON.stringify(quizzes));
+
+    document.getElementById("quizMessage").innerText =
+        "Quiz saved successfully!";
+
+    questions = [];
+}
+
+
+/* =========================
+   DISPLAY QUIZZES
+========================= */
+
+function displayQuizzes() {
+
+    let quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+
+    let list = document.getElementById("quizList");
+
+    if (quizzes.length === 0) {
+        list.innerHTML = "<p>No quizzes available.</p>";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    quizzes.forEach(quiz => {
+
+        let card = document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML =
+            "<h2>" + quiz.title + "</h2>" +
+            "<p>" + quiz.questions.length +
+            " Questions</p>" +
+            "<button onclick=\"openQuiz(" +
+            quiz.id + ")\">Start Quiz</button>";
+
+        list.appendChild(card);
+    });
+}
+
+
+/* =========================
+   OPEN QUIZ
+========================= */
+
+function openQuiz(id) {
+
+    localStorage.setItem("selectedQuiz", id);
+
+    window.location.href = "quiz.html";
+}
+
+
+/* =========================
+   START QUIZ
+========================= */
 
 let currentQuestion = 0;
-let selectedAnswer = -1;
 let score = 0;
-
-
-/* Buttons */
-
-document.getElementById("startBtn")
-    .addEventListener("click", startQuiz);
-
-document.getElementById("nextBtn")
-    .addEventListener("click", nextQuestion);
-
-document.getElementById("restartBtn")
-    .addEventListener("click", restartQuiz);
-
-
-/* Start Quiz */
+let selectedAnswer = null;
 
 function startQuiz() {
 
-    currentQuestion = 0;
-    selectedAnswer = -1;
-    score = 0;
+    let quizzes =
+        JSON.parse(localStorage.getItem("quizzes")) || [];
 
-    document.getElementById("home")
-        .classList.add("hidden");
+    let selectedId =
+        Number(localStorage.getItem("selectedQuiz"));
 
-    document.getElementById("result")
-        .classList.add("hidden");
+    let quiz = quizzes.find(q => q.id === selectedId);
 
-    document.getElementById("quiz")
-        .classList.remove("hidden");
+    if (!quiz) {
+        alert("Quiz not found.");
+        window.location.href = "user.html";
+        return;
+    }
+
+    localStorage.setItem(
+        "currentQuiz",
+        JSON.stringify(quiz)
+    );
 
     showQuestion();
 }
 
 
-/* Show Question */
+/* =========================
+   SHOW QUESTION
+========================= */
 
 function showQuestion() {
 
-    let q = questions[currentQuestion];
+    let quiz =
+        JSON.parse(localStorage.getItem("currentQuiz"));
 
-    let optionsBox =
-        document.getElementById("quizOptions");
+    let q = quiz.questions[currentQuestion];
 
-    selectedAnswer = -1;
+    document.getElementById("quizTitle").innerText =
+        quiz.title;
 
-    document.getElementById("quizQuestion")
-        .textContent = q.question;
-
-    optionsBox.innerHTML = "";
-
-
-    q.options.forEach(function(option, index) {
-
-        let button =
-            document.createElement("button");
-
-        button.textContent = option;
-
-        button.className = "quiz-option";
-
-
-        button.addEventListener("click", function() {
-
-            /* Prevent selecting another answer */
-
-            if (selectedAnswer !== -1) {
-                return;
-            }
-
-            selectedAnswer = index;
-
-
-            /* Correct answer */
-
-            if (index === q.answer) {
-
-                score++;
-
-                button.textContent =
-                    option + " ✓ Correct Answer!";
-
-                button.classList.add("correct");
-
-            }
-
-
-            /* Wrong answer */
-
-            else {
-
-                button.textContent =
-                    option + " ✗ Wrong Answer!";
-
-                button.classList.add("wrong");
-
-
-                /* Show correct answer */
-
-                let correctButton =
-                    optionsBox.children[q.answer];
-
-                correctButton.textContent =
-                    q.options[q.answer] +
-                    " ✓ Correct Answer!";
-
-                correctButton.classList.add("correct");
-            }
-
-
-            /* Disable all options */
-
-            document.querySelectorAll(".quiz-option")
-                .forEach(function(btn) {
-
-                    btn.disabled = true;
-
-                });
-
-        });
-
-
-        optionsBox.appendChild(button);
-
-    });
-
-
-    /* Show progress */
-
-    document.getElementById("progress")
-        .textContent =
+    document.getElementById("progress").innerText =
         "Question " +
         (currentQuestion + 1) +
         " of " +
-        questions.length;
-}
+        quiz.questions.length;
 
+    document.getElementById("quizQuestion").innerText =
+        q.question;
 
-/* Next Question */
+    let options =
+        document.getElementById("quizOptions");
 
-function nextQuestion() {
+    options.innerHTML = "";
 
-    if (selectedAnswer === -1) {
+    selectedAnswer = null;
 
-        alert("Please select an answer.");
+    q.options.forEach((option, index) => {
 
-        return;
-    }
+        let div = document.createElement("div");
 
+        div.className = "option";
 
-    currentQuestion++;
+        div.innerText = option;
 
+        div.onclick = function () {
 
-    if (currentQuestion < questions.length) {
+            selectedAnswer = index;
 
-        showQuestion();
+            document.querySelectorAll(".option")
+                .forEach(item =>
+                    item.classList.remove("selected")
+                );
 
-    }
+            div.classList.add("selected");
+        };
 
-    else {
-
-        showResult();
-
-    }
-}
-
-
-/* Show Result */
-
-function showResult() {
-
-    document.getElementById("quiz")
-        .classList.add("hidden");
-
-    document.getElementById("result")
-        .classList.remove("hidden");
-
-
-    document.getElementById("score")
-        .textContent =
-        "Your score: " +
-        score +
-        " / " +
-        questions.length;
-
-
-    let answersBox =
-        document.getElementById("answers");
-
-    answersBox.innerHTML = "";
-
-
-    questions.forEach(function(q, index) {
-
-        let item =
-            document.createElement("p");
-
-
-        /* Question */
-
-        let question =
-            document.createElement("b");
-
-        question.textContent =
-            (index + 1) +
-            ". " +
-            q.question;
-
-
-        /* Correct Answer */
-
-        let answer =
-            document.createElement("span");
-
-        answer.textContent =
-            "Correct Answer: " +
-            q.options[q.answer];
-
-
-        item.appendChild(question);
-
-        item.appendChild(
-            document.createElement("br")
-        );
-
-        item.appendChild(answer);
-
-        answersBox.appendChild(item);
-
+        options.appendChild(div);
     });
 }
 
 
-/* Restart Quiz */
+/* =========================
+   NEXT QUESTION
+========================= */
 
-function restartQuiz() {
+function nextQuestion() {
 
-    document.getElementById("result")
-        .classList.add("hidden");
+    let quiz =
+        JSON.parse(localStorage.getItem("currentQuiz"));
 
-    document.getElementById("home")
-        .classList.remove("hidden");
+    if (selectedAnswer === null) {
+        alert("Please select an answer.");
+        return;
+    }
+
+    if (
+        selectedAnswer ===
+        quiz.questions[currentQuestion].answer
+    ) {
+        score++;
+    }
+
+    currentQuestion++;
+
+    if (currentQuestion < quiz.questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        localStorage.setItem("quizScore", score);
+        localStorage.setItem(
+            "quizTotal",
+            quiz.questions.length
+        );
+
+        currentQuestion = 0;
+        score = 0;
+
+        window.location.href = "result.html";
+    }
+}
 
 
-    currentQuestion = 0;
+/* =========================
+   QUIZ COUNT
+========================= */
 
-    selectedAnswer = -1;
+function displayQuizCount() {
 
-    score = 0;
+    let quizzes =
+        JSON.parse(localStorage.getItem("quizzes")) || [];
+
+    let count = document.getElementById("quizCount");
+
+    if (count) {
+        count.innerText = quizzes.length;
+    }
 }
